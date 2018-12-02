@@ -6,8 +6,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -22,7 +25,18 @@ public class MainActivity extends ActivityBase {
         setContentView(R.layout.activity_main);
         Init();
         SetActions();
-        SetGoogleSignInActions();
+       // SetGoogleSignInActions();
+
+
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(this.getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this,this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
+                .build();
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -64,15 +78,17 @@ public class MainActivity extends ActivityBase {
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AccountSignOut();
+                AccountSignOut(googleApiClient);
             }
         });
+    /*
         revokeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AccountRevoke();
             }
         });
+        */
     }
 
     @Override
