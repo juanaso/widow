@@ -5,15 +5,15 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.challenge.juan.widow.Home.Views.MainActivity;
+import com.challenge.juan.widow.Login.Views.LoginActivity;
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public abstract class ActivityBase extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener  {
     public GoogleApiClient googleApiClient;
@@ -22,33 +22,7 @@ public abstract class ActivityBase extends AppCompatActivity implements GoogleAp
 
     public abstract void handleSignInResult(GoogleSignInResult result);
 
-    public void SetGoogleSignInActions() {
-        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this,this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
-                .build();
-    }
-
-    public void AccountRevoke() {
-        firebaseAuth.signOut();
-        Auth.GoogleSignInApi.revokeAccess(googleApiClient).setResultCallback(new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                if(status.isSuccess()){
-                    GoToLoginActivity();
-                }else{
-                    Toast.makeText(getApplicationContext(), "cannot Revoke",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    public void AccountSignOut() {
+    public void AccountSignOut(GoogleApiClient googleApiClient) {
         firebaseAuth.signOut();
         Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override

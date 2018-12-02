@@ -1,70 +1,33 @@
-package com.challenge.juan.widow;
+package com.challenge.juan.widow.Home.Views;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.challenge.juan.widow.Home.Presenters.HomePresenter;
+import com.challenge.juan.widow.Home.Presenters.IHomePresenter;
+import com.challenge.juan.widow.Login.Views.LoginActivity;
+import com.challenge.juan.widow.R;
 
-public class MainActivity extends ActivityBase {
+
+public class MainActivity extends AppCompatActivity implements IHomeView {
     Toolbar toolbar;
     Button logOutButton;
     Button revokeButton;
+    private IHomePresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        presenter = new HomePresenter(this);
         Init();
         SetActions();
-       // SetGoogleSignInActions();
-
-
-        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(this.getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this,this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
-                .build();
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
-
-                }else{
-                    GoToLoginActivity();
-                }
-            }
-        };
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //CheckIfLogedIn();
-        firebaseAuth.addAuthStateListener(firebaseAuthListener);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(firebaseAuthListener != null){
-            firebaseAuth.removeAuthStateListener(firebaseAuthListener);
-        }
+        presenter.setGoogleSignInActions();
     }
 
     private void Init() {
@@ -74,33 +37,39 @@ public class MainActivity extends ActivityBase {
         revokeButton = findViewById(R.id.MainActivityButtonRevoke);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.addAuthStateListener();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter.removeAuthStateListener();
+    }
+
     private void SetActions() {
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AccountSignOut(googleApiClient);
+                presenter.SignOut();
             }
         });
-    /*
+
         revokeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AccountRevoke();
+                presenter.revoke();
             }
         });
-        */
+
     }
 
     @Override
-    public void handleSignInResult(GoogleSignInResult result) {
-        if(result.isSuccess()){
-        }else{
-            GoToLoginActivity();
-        }
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        //TODO
+    public void goToLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
