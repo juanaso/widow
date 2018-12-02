@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "150901358253",
+    "firebase_url": "https://widowbase.firebaseio.com",
+    "project_id": "widowbase",
+    "storage_bucket": "widowbase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150901358253:android:d4b96fa02ef1a36e",
+        "android_client_info": {
+          "package_name": "com.challenge.juan.widow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150901358253-og7qsoepnu75783m8v0ps75g08m48hak.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.challenge.juan.widow",
+            "certificate_hash": "10ccf6d5e8af2314ce25e51c3464df1bc3864d5a"
+          }
+        },
+        {
+          "client_id": "150901358253-qoio4ukvhvqlrupnmkh7ev3hgt7bdl4q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzNi0UF1wo3lXLnOkEIVJyXS1Z5m7tSVU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150901358253-qoio4ukvhvqlrupnmkh7ev3hgt7bdl4q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
