@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Toast;
 import com.challenge.juan.widow.Login.Presenters.ILoginPresenter;
 import com.challenge.juan.widow.Login.Presenters.LoginPresenter;
-import com.challenge.juan.widow.Home.Views.MainActivity;
 import com.challenge.juan.widow.R;
+import com.challenge.juan.widow.UploadBook.Views.UploadBookActivity;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     @Override
     public void goToHome() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, UploadBookActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
