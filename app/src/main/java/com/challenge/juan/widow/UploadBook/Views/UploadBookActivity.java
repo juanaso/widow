@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.challenge.juan.widow.Models.Book;
 import com.challenge.juan.widow.R;
@@ -54,5 +55,10 @@ public class UploadBookActivity extends AppCompatActivity implements IUploadBook
         book.setTitle(bookTitleString);
         book.setAuthor(authorNameString);
         return  book;
+    }
+
+    @Override
+    public void Toast(String message) {
+        Toast.makeText(this, message,Toast.LENGTH_SHORT).show();
     }
 }

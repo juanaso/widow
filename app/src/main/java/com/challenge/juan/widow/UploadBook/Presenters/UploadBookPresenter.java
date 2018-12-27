@@ -16,11 +16,15 @@ public class UploadBookPresenter implements IUploadBookPresenter {
     public UploadBookPresenter(UploadBookActivity view) {
         this.view = view;
         interactor = new UploadBookInteractor(this,view);
-
     }
 
     @Override
     public void uploadBook(Book book) {
         interactor.uploadBook(book);
+    }
+
+    @Override
+    public void Toast(String message) {
+        view.Toast(message);
     }
 }

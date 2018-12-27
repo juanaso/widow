@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface IUploadBookPresenter {
     void uploadBook(Book book);
-
+    void Toast(String message);
 }

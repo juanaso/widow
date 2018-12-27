@@ -1,20 +1,42 @@
 package com.challenge.juan.widow.FireBase;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.challenge.juan.widow.Models.Book;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class FireBaseDataBaseManager {
 
-    public DatabaseReference ref;
-    final FirebaseDatabase database;
+    public FirebaseFirestore db;
+
     public FireBaseDataBaseManager() {
-        database = FirebaseDatabase.getInstance();
-       try{
-           ref = database.getReference("widowbase/database/widowbase/data");
+        db = FirebaseFirestore.getInstance();
+    }
+    public abstract void handleErrorMessage(String message);
 
-       }catch (Exception e)
-       {
+    public void FireStoreUploadBook(Book book) {
 
-           String a = "" ;
-       }
+        Map<String, Book> currentBook = new HashMap<>();
+        currentBook.put("juanasoisawesome", book);
+        final String title = book.getTitle();
+
+        db.collection("books")
+                .add(currentBook)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        handleErrorMessage("Book: "+ title+" Added" );
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(Exception e) {
+                        handleErrorMessage("Looks Like theres a mistake! Book: "+ title+" NOT Added" );
+
+                    }
+                });
     }
 }
