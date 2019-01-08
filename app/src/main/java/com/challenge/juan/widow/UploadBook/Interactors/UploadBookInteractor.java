@@ -22,6 +22,6 @@ public class UploadBookInteractor extends FireBaseDataBaseManager implements IUp
 
     @Override
     public void uploadBook(Book book) {
-        FireStoreUploadBook(book);
+        super.uploadBook(book);
     }
 }

@@ -1,18 +1,14 @@
 package com.challenge.juan.widow.Models;
 
+
 public class Book {
-    private String id;
     private String author;
     private String title;
     private String fotoUrl;
 
-    public String getId() {
-        return id;
+    public Book() {
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getAuthor() {
         return author;

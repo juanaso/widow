@@ -43,7 +43,6 @@ public class UploadBookActivity extends AppCompatActivity implements IUploadBook
     }
 
     public void uploadBook() {
-        //Map<String, Book> Book
         Book book = getBookData();
         presenter.uploadBook(book);
     }

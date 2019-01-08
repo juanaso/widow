@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Home.Views.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context=".Home.Views.MainActivity">
 
 
     <Button
@@ -41,6 +40,6 @@
         android:hint="Author"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_book_name" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_book_title" />
 
 </android.support.constraint.ConstraintLayout>

@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements IHomeView {
 
     private void Init() {
         toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         logOutButton = findViewById(R.id.MainActivityButtonLogout);
         revokeButton = findViewById(R.id.MainActivityButtonRevoke);
     }

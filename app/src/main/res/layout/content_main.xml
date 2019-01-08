@@ -9,7 +9,11 @@
     tools:showIn="@layout/activity_main">
 
 
+
+
+
     <Button
+        android:visibility="gone"
         android:id="@+id/MainActivityButtonLogout"
         android:layout_width="192dp"
         android:layout_height="wrap_content"
@@ -22,6 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:visibility="gone"
         android:id="@+id/MainActivityButtonRevoke"
         android:layout_width="189dp"
         android:layout_height="wrap_content"
