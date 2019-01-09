@@ -8,9 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -57,21 +55,11 @@ public abstract class FireBaseDataBaseManager {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                              try{
-                                  int ysi = 545;
-                                  Map<String, Object> a = document.getData();
-                                  Book c = (Book) a.values();
-                                  Object b = a.get("title");
-
-
-                                         // .get("title").toString();
-                                  int ysid = 545;
-
-                              }catch (Exception e)
-                              {
-                                  int ysiss = 585;
-                              }
-                                int ab = 56;
+                              Map<String, Object>a = document.getData();
+                              a = new HashMap<>(a);
+                              HashMap<String, String> b = (HashMap<String, String> )a.get("juanasoisawesome");
+                              String title = b.get("title");
+                              Book book = new Book(b.get("author"),b.get("title"),b.get("fotoUrl"));
                             }
                         } else {
                                 handleErrorMessage( "Error getting documents." + task.getException());

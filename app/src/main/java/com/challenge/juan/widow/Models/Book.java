@@ -9,6 +9,11 @@ public class Book {
     public Book() {
     }
 
+    public Book(String author, String title, String fotoUrl) {
+        this.author = author;
+        this.title = title;
+        this.fotoUrl = fotoUrl;
+    }
 
     public String getAuthor() {
         return author;
